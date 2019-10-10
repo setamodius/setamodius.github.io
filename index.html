@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="tr">
+
+<head>
+  <script src="https://unpkg.com/mqtt@3.0.0/dist/mqtt.min.js"></script>
+  <meta charset="utf-8">
+</head>
+
+<body>
+  <div>
+    <label><b>Username</b></label>
+    <input id="txtusername" />
+  </div>
+  <div>
+    <label><b>Password</b></label>
+    <input id="txtusername" type="password" />
+  </div>
+  <div>
+    <button id="login" onclick="login()">Connect</button>
+    <label id="status"></label>
+  </div>
+  <input id="data" />
+  <button id="demo" onclick="pub()">Deneme</button>
+</body>
+<script>
+  var host = 'wss://m10.cloudmqtt.com:33599/mqtt'
+  document.getElementById("status").innerHTML = "-";
+
+  var client
+  function login() {
+    var options = {
+      username: 'jrzriegi',
+      password: 'jtNOJAaitJ5N',
+      clientid: 'krte'
+    }
+    client = mqtt.connect(host, options)
+    client.on('message', function (topic, message, packet) {
+      document.getElementById("demo").innerHTML = message.toString();
+    })
+    client.on('connect', function () {
+      document.getElementById("status").innerHTML = "Connected";
+      client.subscribe('test')
+    })
+  }
+
+
+  function pub() {
+    client.publish('test', document.getElementById("data").value)
+  }
+
+</script>
+
+</html>
