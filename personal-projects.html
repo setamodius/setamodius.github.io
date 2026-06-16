@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Personal Projects — Kerem Bilgiçer</title>
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="site-title"><a href="index.html">Kerem Bilgiçer<span class="dot">.</span></a></div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="personal-projects.html" class="active">Personal Projects</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="narrow">
+  <div class="wrap">
+
+    <h1>Personal Projects</h1>
+    <p class="tagline">Smaller in scope, but where most of the actual learning happens — no deadline, no committee, just a problem worth solving.</p>
+
+    <div class="section">
+      <div class="card">
+        <h3>Pharmatherm</h3>
+        <p class="meta">Motivation</p>
+        <p>Maintaining the cold chain in pharmacies is critical — a few hours of refrigerator failure can ruin temperature-sensitive medication. Pharmatherm grew out of that real, specific need: a device that watches refrigerator temperature continuously and tells someone the moment things go wrong, without relying on a person checking a thermometer.</p>
+        <p class="meta">Architecture</p>
+        <p>Custom hardware reads temperature sensors over Bluetooth and forwards readings to a cloud-based server. If the temperature crosses a configured threshold, the system sends an SMS alert to the people responsible. Because internet connectivity at a pharmacy can't be assumed to be reliable, readings are also written to an SD card locally — so a connection drop doesn't mean a data gap, and the buffered data syncs to the server once the connection is restored.</p>
+        <p class="meta">Lessons learned</p>
+        <p>The SD-card buffering turned out to be the most important design decision in the whole project — it's a small reminder that "the cloud" is not a substitute for handling the case where the network just isn't there.</p>
+        <div class="tags"><span class="tag">Bluetooth</span><span class="tag">SMS Alerts</span><span class="tag">Offline Buffering</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Janus Lock</h3>
+        <p class="meta">Motivation</p>
+        <p>Janus Lock was created to simplify access to my garage while preserving the security mechanisms already provided by the original rolling-code remote control. Rather than attempting to replicate or reverse engineer the proprietary radio protocol, the goal was to integrate modern connectivity on top of the existing access system in a reliable, non-invasive way.</p>
+        <p class="meta">Architecture</p>
+        <p>The system is built around an ESP32-C3 microcontroller with an integrated OLED display and MQTT connectivity. A modified rolling-code remote control remains responsible for all RF communication with the garage door — Janus Lock electronically actuates the original remote's push button using a CPC1017N solid-state relay, effectively emulating a button press while preserving the manufacturer's security model. Configuration is handled through a lightweight web interface, with operational status shown on the onboard OLED screen.</p>
+        <p class="meta">Lessons learned</p>
+        <p>This project reinforced an important engineering principle: sometimes the most reliable solution isn't replacing an existing system, but integrating with it. By leveraging the original remote rather than reimplementing its protocol, the solution stayed secure, maintainable, and resilient while gaining modern IoT capabilities.</p>
+        <div class="tags"><span class="tag">ESP32-C3</span><span class="tag">MQTT</span><span class="tag">Solid-State Relay</span><span class="tag">Web Config</span></div>
+      </div>
+
+      <div class="card">
+        <h3>BLE Door Access System</h3>
+        <p class="meta">Motivation</p>
+        <p>This project automates access to the entrance door of my apartment building without requiring a smartphone application, cloud service, or manual interaction. The objective was a simple, reliable, proximity-based access system that operates entirely locally.</p>
+        <p class="meta">Architecture</p>
+        <p>An ESP32 microcontroller continuously scans for an authorized BLE beacon and evaluates signal strength (RSSI) to estimate proximity. When the beacon enters a predefined range, the system triggers the door release mechanism through a relay output. The software includes connection monitoring, signal filtering, reconnection logic, and status feedback through LEDs and audible indicators.</p>
+        <p class="meta">Lessons learned</p>
+        <p>The project provided valuable experience in BLE communication, signal-strength-based decision making, and embedded event-driven software design. One of the most important observations was the challenge of translating unreliable radio signals into reliable real-world actions — achieving consistent behavior required careful filtering, timing logic, and fault tolerance mechanisms.</p>
+        <div class="tags"><span class="tag">ESP32</span><span class="tag">BLE / RSSI</span><span class="tag">Relay Control</span><span class="tag">Edge-local</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Home Automation</h3>
+        <p class="meta">Motivation</p>
+        <p>Two small, separate annoyances that turned out to share a solution: watering plants on a schedule that actually matched what they needed, and a house that didn't adjust its own lighting or heating without being told to.</p>
+        <p class="meta">Architecture</p>
+        <p>An automated irrigation controller reads soil moisture and waters on a programmable schedule via an LCD interface, rather than on a fixed timer that ignores actual conditions. Separately, a lighting and heating system built on ESP32 and Sonoff devices adjusts home lighting based on sunset time and controls the boiler based on indoor temperature — a simple, low-cost alternative to commercial home automation hubs.</p>
+        <p class="meta">Lessons learned</p>
+        <p>Sensor-driven automation beats fixed schedules almost every time, but only if the sensor itself is trustworthy — most of the iteration on both projects went into making the moisture and temperature readings stable rather than into the control logic itself.</p>
+        <div class="tags"><span class="tag">ESP32</span><span class="tag">Sonoff</span><span class="tag">Soil Moisture Sensing</span></div>
+      </div>
+
+      <div class="card">
+        <h3>ESP32 &amp; MQTT Experiments</h3>
+        <p class="meta">Motivation</p>
+        <p>A standing playground for testing ideas that are too small or too exploratory for a "real" project — a new sensor, a different MQTT broker configuration, a power-management trick — before they get folded into something like Janus Lock, the BLE door access system, or the home automation setup.</p>
+        <p class="meta">Architecture</p>
+        <p>Mostly ESP32-based nodes publishing to a local MQTT broker, used to test publish-subscribe patterns, payload formats, QoS behavior, and low-power sleep cycles outside the constraints of a production system.</p>
+        <p class="meta">Lessons learned</p>
+        <p>This is where most of the practical MQTT and embedded knowledge that ends up in professional SCADA work actually gets tested first — it's cheaper to learn that a sleep mode breaks reconnection logic on a $5 board on a desk than on a deployed system.</p>
+        <div class="tags"><span class="tag">ESP32</span><span class="tag">MQTT</span><span class="tag">Low Power</span></div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Kerem Bilgiçer · Setamodius</div>
+</footer>
+</body>
+</html>

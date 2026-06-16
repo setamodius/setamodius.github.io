@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Projects — Kerem Bilgiçer</title>
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="site-title"><a href="index.html">Kerem Bilgiçer<span class="dot">.</span></a></div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html" class="active">Projects</a></li>
+        <li><a href="personal-projects.html">Personal Projects</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="narrow">
+  <div class="wrap">
+
+    <h1>Professional Projects</h1>
+    <p class="tagline">Organized by engineering domain, not by employer — the problems and decisions matter more than the job titles.</p>
+
+    <div class="section">
+      <div class="card">
+        <h3>SCADA Platform Architecture</h3>
+        <p>Most of my career has been spent evolving SCADA software from monolithic, single-binary applications into modular, distributed platforms. That evolution wasn't driven by fashion — it was driven by real operational pain: a single crash taking down an entire control room view, a deployment that required a maintenance window, a feature that couldn't ship without retesting everything else.</p>
+        <p>The current generation of this work is built around a microservices architecture with MQTT as the primary communication backbone between services and field gateways, RabbitMQ for internal message brokering, and containerized deployments that let individual services be updated, scaled, or restarted independently. High availability isn't an afterthought bolted on top — it shapes the architecture from the start: redundant brokers, stateless services where possible, and a clear separation between the data acquisition layer and the presentation layer.</p>
+        <p>The front end has moved the same direction — from a WPF desktop client to Avalonia UI and WebAssembly, and a web-based SCADA client over WebSocket, so the same system can be operated from a control room workstation or a browser without maintaining two separate codebases.</p>
+        <div class="tags">
+          <span class="tag">MQTT</span>
+          <span class="tag">RabbitMQ</span>
+          <span class="tag">WebSocket</span>
+          <span class="tag">Avalonia / WASM</span>
+          <span class="tag">High Availability</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Tunnel Automation Systems</h3>
+        <p>Tunnel automation sits at the intersection of safety and software: ventilation control, lighting, incident detection, and traffic management all have to work together correctly, because the cost of a software bug here isn't a support ticket. I've worked on real-world deployments across international projects, including on-site installation and commissioning at remote construction sites — which means designing systems that have to be brought up correctly by a small team, often under time pressure, far from anyone who wrote the code.</p>
+        <p>Integration is the recurring challenge: every site brings a different mix of PLCs, sensors, and legacy equipment, and the SCADA platform has to absorb that variability without becoming a pile of one-off hacks. That meant building adapter layers for different Dynamic Message Sign (DMS) brands, custom dashboards for site-specific monitoring, and network designs — VLAN structures, switch configuration — that hold up under field conditions.</p>
+        <div class="tags">
+          <span class="tag">DMS Integration</span>
+          <span class="tag">PLC Interfacing</span>
+          <span class="tag">On-site Commissioning</span>
+          <span class="tag">Network Design</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Industrial Communication</h3>
+        <p>Industrial protocols are where the abstract architecture meets physical reality — registers, polling cycles, byte order, and the occasional device that almost but not quite follows the spec. I've worked directly with Modbus (TCP and serial), OPC DA/UA, SNMP, BACnet, and NTCIP, both consuming third-party devices and building adapter software that translates between protocols so a SCADA platform can speak to equipment it was never originally designed for.</p>
+        <p>MQTT deserves its own mention: adopting it for intelligent transportation systems meant designing around low-bandwidth links, a publish-subscribe model instead of constant polling, and end-to-end encryption and authentication so field devices could be trusted on networks that weren't always trustworthy.</p>
+        <div class="tags">
+          <span class="tag">Modbus</span>
+          <span class="tag">OPC UA / DA</span>
+          <span class="tag">SNMP</span>
+          <span class="tag">BACnet</span>
+          <span class="tag">MQTT</span>
+          <span class="tag">NTCIP</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>Distributed Infrastructure</h3>
+        <p>Once the platform itself became distributed, the infrastructure underneath it had to follow. Deployments moved to Docker, orchestrated with Swarm, with GlusterFS and later Ceph providing redundant storage so a single node failure doesn't become a data-loss incident. Time-series data from field devices lives in InfluxDB; relational and configuration data lives in PostgreSQL — chosen deliberately rather than defaulting to one database for everything.</p>
+        <p>The guiding principle here is the same one that shows up everywhere else in this list: prefer boring, well-understood infrastructure that fails predictably over clever infrastructure that fails in ways nobody on call can diagnose at 3am.</p>
+        <div class="tags">
+          <span class="tag">Docker / Swarm</span>
+          <span class="tag">Ceph / GlusterFS</span>
+          <span class="tag">PostgreSQL</span>
+          <span class="tag">InfluxDB</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Kerem Bilgiçer · Setamodius</div>
+</footer>
+</body>
+</html>

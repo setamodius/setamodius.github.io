@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Writing — Kerem Bilgiçer</title>
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="site-title"><a href="index.html">Kerem Bilgiçer<span class="dot">.</span></a></div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="personal-projects.html">Personal Projects</a></li>
+        <li><a href="writing.html" class="active">Writing</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="narrow">
+  <div class="wrap">
+
+    <h1>Writing</h1>
+    <p class="tagline">Notes from the field — SCADA architecture, protocols, distributed systems, and the occasional lesson learned the hard way.</p>
+
+    <div class="post-list">
+      <div class="post">
+        <div class="post-date">Notes</div>
+        <h3><a href="writing/mqtt-for-industrial-systems.html">MQTT for Industrial Systems: Why Publish-Subscribe Wins Over Polling</a></h3>
+        <p class="muted">Polling is simple until you have a thousand devices on a constrained link. A look at why MQTT's publish-subscribe model fits industrial and transportation systems better than the polling architectures it tends to replace.</p>
+      </div>
+      <div class="post">
+        <div class="post-date">Notes</div>
+        <h3><a href="writing/monolith-to-distributed-scada.html">From Monolith to Distributed: Rearchitecting a SCADA Platform</a></h3>
+        <p class="muted">What actually breaks when a single-binary SCADA application grows past its original design, and what changes when it's rebuilt as a set of independently deployable services.</p>
+      </div>
+    </div>
+
+    <p class="dim" style="margin-top:40px;">More notes are added as they're written — this is a working journal, not a content calendar.</p>
+
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Kerem Bilgiçer · Setamodius</div>
+</footer>
+</body>
+</html>

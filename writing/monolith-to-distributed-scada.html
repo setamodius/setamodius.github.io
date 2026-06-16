@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>From Monolith to Distributed: Rearchitecting a SCADA Platform — Kerem Bilgiçer</title>
+<link rel="icon" href="../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="site-title"><a href="../index.html">Kerem Bilgiçer<span class="dot">.</span></a></div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../personal-projects.html">Personal Projects</a></li>
+        <li><a href="../writing.html" class="active">Writing</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="narrow">
+  <div class="wrap">
+    <p class="dim"><a href="../writing.html">← Writing</a></p>
+    <h1>From Monolith to Distributed: Rearchitecting a SCADA Platform</h1>
+    <p class="tagline">Notes</p>
+
+    <article class="post-body">
+      <p>A monolithic SCADA application is easy to justify in the beginning. One process, one deployment, one thing to start when the system boots. It stays easy to justify for a surprisingly long time — right up until the day one misbehaving driver for a single device takes down the operator's entire view of the site.</p>
+
+      <h2>The failure modes that force the question</h2>
+      <p>The pressure to split a monolith rarely comes from an architecture diagram — it comes from incidents. A protocol driver leaks memory and the whole application restarts, dropping every connection at once. A new feature needs a different library version than an old one already in the binary. A deployment requires a maintenance window because there's no way to update one part without restarting everything. Each of these is survivable once. They stop being survivable once the system has been in production long enough to accumulate all of them at the same time.</p>
+
+      <h2>What actually gets separated</h2>
+      <p>The useful split isn't arbitrary — it follows the natural seams in a SCADA platform: data acquisition (the protocol drivers talking to field devices), the message bus that decouples acquisition from everything else, persistence (time-series and relational), business logic and alarms, and presentation (desktop and web clients). Each of these has a different failure profile and a different scaling need, which is exactly why bundling them into one process was the wrong call to begin with.</p>
+      <p>MQTT, with RabbitMQ handling internal service-to-service messaging, becomes the layer that makes the split tolerable. A driver crashing no longer takes the UI down with it — it just stops publishing, and everything downstream notices a stale data point instead of a dead application.</p>
+
+      <h2>What gets harder</h2>
+      <p>Distribution trades one set of problems for another, and it's worth being honest about that trade rather than pretending the new architecture has no failure modes of its own. Debugging a single faulty reading now means tracing it across several services instead of stepping through one process. Versioning matters more, because services are deployed independently and have to keep talking to each other across versions. And the message bus itself becomes infrastructure that needs its own monitoring — a SCADA platform that doesn't know its own broker went quiet has just relocated the single point of failure rather than removed it.</p>
+
+      <h2>High availability as a design constraint, not a feature</h2>
+      <p>The biggest mindset shift isn't technical, it's architectural: high availability has to be assumed from the first design decision, not retrofitted later. That means stateless services wherever the data allows it, redundant brokers instead of a single instance, and containerized deployment — Docker and Swarm in this case — so a failed node is a recoverable event instead of an outage. Storage redundancy (Ceph, after starting with GlusterFS) follows the same logic: a disk or node failing shouldn't be a story anyone tells in a postmortem.</p>
+
+      <h2>The actual payoff</h2>
+      <p>None of this is free, and a smaller system genuinely doesn't need it. The payoff shows up specifically at the scale where a monolith starts failing in compound ways: independent deployability, fault isolation, and the ability to scale the parts that actually need scaling instead of the whole application. Rearchitecting isn't a sign the original design was wrong — it's what happens when a system outgrows the assumptions it was reasonably built under.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Kerem Bilgiçer · Setamodius</div>
+</footer>
+</body>
+</html>

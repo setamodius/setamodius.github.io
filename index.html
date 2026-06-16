@@ -1,150 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Setamodius's Personal Page</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background: url('back.png') no-repeat center center fixed;
-            background-size: cover;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-        }
-        header {
-            background: #333;
-            color: #fff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #77aaff 3px solid;
-        }
-        header a {
-            color: #fff;
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 16px;
-        }
-        header ul {
-            padding: 0;
-            list-style: none;
-        }
-        header li {
-            display: inline;
-            padding: 0 20px 0 20px;
-        }
-        .showcase {
-            min-height: 400px;
-            text-align: center;
-            color: #fff;
-        }
-        .showcase h1 {
-            margin-top: 100px;
-            font-size: 55px;
-            margin-bottom: 10px;
-        }
-        .showcase p {
-            font-size: 20px;
-        }
-        section {
-            padding: 20px 0;
-            border-bottom: #ddd 1px solid;
-        }
-        .content {
-            margin: 20px 0;
-        }
-        footer {
-            padding: 20px;
-            margin-top: 20px;
-            color: #fff;
-            background-color: #333;
-            text-align: center;
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kerem Bilgiçer — Software Architect</title>
+<meta name="description" content="Kerem Bilgiçer (Setamodius) — Software Architect specializing in SCADA systems, industrial automation, distributed systems, and intelligent transportation infrastructure.">
+<link rel="icon" href="favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>Setamodius's Personal Page</h1>
-            <nav>
-                <ul>
-                    <li><a href="#about">About Me</a></li>
-                    <li><a href="#projects">Projects</a></li>
-                    <li><a href="#contact">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+<header class="site">
+  <div class="wrap">
+    <div class="site-title"><a href="index.html">Kerem Bilgiçer<span class="dot">.</span></a></div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="personal-projects.html">Personal Projects</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="timeline.html">Timeline</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
 
-    <div class="showcase">
-        <div class="container">
-            <h1>Welcome to My Personal Page</h1>
-            <p>Exploring the intersection of technology and innovation</p>
-        </div>
+<main class="narrow">
+  <div class="wrap">
+
+    <div class="section">
+      <h1>Building reliable industrial software, from embedded devices to distributed platforms.</h1>
+      <p class="lede">Software Architect specializing in SCADA systems, industrial automation, distributed systems, and intelligent transportation infrastructure.</p>
     </div>
 
-    <section id="about" class="container">
-        <h2>About Me</h2>
-        <p>Hi, I'm Setamodius, an experienced software developer with a background in SCADA systems, MQTT, and intelligent transportation systems. I've worked on numerous tunnel and highway projects, and I'm passionate about the evolution of artificial intelligence and its impact on our future.</p>
-    </section>
+    <div class="section">
+      <p>I'm Kerem Bilgiçer — online alias <strong>Setamodius</strong>. Over 15 years I've worked across the full stack of industrial software: microcontrollers and field protocols at one end, distributed cloud architectures at the other. Most of that time has gone into SCADA platforms, tunnel automation systems, and intelligent transportation infrastructure deployed in real, demanding environments.</p>
+      <p class="muted">This site is a workshop, not a brochure. It documents what I build, how I think about systems, and what I've learned doing it.</p>
+    </div>
 
-    <section id="projects" class="container">
-        <h2>Projects</h2>
-        <div class="content">
-            <h3>SCADA Software Development</h3>
-            <p>Developed a modular and scalable SCADA software platform using WPF technology. Transitioning to Avalonia UI and WebAssembly to enable cross-platform support and web deployment. Implemented a microservices architecture with RabbitMQ for message brokering and Quasar Framework for the front-end. Involved in developing an 8-channel current reading card utilizing the Modbus TCP protocol and Texas Instruments' TM4C1294KCPDT microcontroller.</p>
-        </div>
-        <div class="content">
-            <h3>Intelligent Transportation Systems</h3>
-            <p>Integrated MQTT protocol for efficient and secure data transmission in intelligent transportation systems. Focused on low bandwidth usage, publish-subscribe model, and seamless integration with IoT devices and microcontrollers. Enhanced system security through end-to-end encryption and authentication mechanisms. Managed on-site installation and commissioning of SCADA systems for remote construction sites.</p>
-        </div>
-        <div class="content">
-            <h3>Remote Construction Site Automation</h3>
-            <p>Implemented automation solutions for remote construction sites, leveraging SCADA systems to monitor and control site operations. Utilized sensors and IoT devices to collect real-time data, enabling predictive maintenance and improved operational efficiency. Developed custom dashboards for data visualization and analysis, and worked on network design including VLAN structures and switch configuration.</p>
-        </div>
-        <div class="content">
-            <h3>Dynamic Message Sign (DMS) Management</h3>
-            <p>Developed message preparation and management software for various brands of Dynamic Message Signs (DMS). Prepared adapter software to facilitate communication integration between DMS devices and SCADA systems, ensuring seamless data flow and efficient traffic management.</p>
-        </div>
-        <div class="content">
-            <h3>Web-Based SCADA Client</h3>
-            <p>Designed a web-based SCADA client using websocket technology, providing flexible usage options. Dockerized the entire software for easier deployment and management, enabling containerized operation with GlusterFS for redundancy. Integrated third-party software support to include various industrial communication protocols such as Modbus, OPC DA, SNMP, and NTCIP.</p>
-        </div>
-        <div class="content">
-            <h3>GitHub Projects</h3>
-            <p>Explore my open-source contributions and personal projects on <a href="https://github.com/Setamodius" target="_blank">GitHub</a>, including repositories on SCADA systems, MQTT integrations, and web technologies.</p>
-        </div>
-    </section>
+    <div class="home-links">
+      <a href="projects.html">Professional projects →</a>
+      <a href="personal-projects.html">Personal projects →</a>
+      <a href="writing.html">Writing →</a>
+      <a href="about.html">About →</a>
+    </div>
 
-    <section id="hobbies" class="container">
-        <h2>Hobby Projects</h2>
-        <div class="content">
-            <h3>Smart Irrigation System</h3>
-            <p>This project is an automated system designed to supply the necessary water for plants. It can be easily programmed via an LCD screen and performs watering automatically when needed based on the moisture level of the soil at predetermined days and times. This system contributes to the healthy growth of plants while conserving water.</p>
-        </div>
-        <div class="content">
-            <h3>Pharmatherm</h3>
-            <p>Maintaining the cold chain in pharmacies is of vital importance. Pharmatherm is a product I developed to address this need. It monitors the temperature inside pharmacy refrigerators through sensors and sends SMS alerts to concerned individuals if the temperature exceeds set limits. For this product, I designed hardware that collects data from sensors via Bluetooth technology and transmits it to a cloud-based server. I also integrated a system that saves data to an SD card in case of internet connection failures, ensuring no data loss and transmitting it to the server once the connection is restored.</p>
-        </div>
-        <div class="content">
-            <h3>Home Lighting and Temperature Control System</h3>
-            <p>This project aims to make your home smarter and more energy-efficient. It automatically adjusts the home lighting according to the sunset time and controls the heating system (e.g. boiler) based on the indoor temperature. Using ESP32 and SonOff devices, the project provides a simple, effective, and cost-efficient solution for home automation.</p>
-        </div>
-    </section>
+  </div>
+</main>
 
-    <section id="contact" class="container">
-        <h2>Contact</h2>
-        <p>Feel free to reach out via <a href="mailto:setamodius@example.com">email</a> or connect with me on <a href="https://www.linkedin.com/in/setamodius" target="_blank">LinkedIn</a>.</p>
-    </section>
-
-    <footer>
-        <p>&copy; 2024 Setamodius's Personal Page. All rights reserved.</p>
-    </footer>
+<footer class="site">
+  <div class="wrap">Kerem Bilgiçer · Setamodius</div>
+</footer>
 </body>
 </html>

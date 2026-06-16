@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MQTT for Industrial Systems — Kerem Bilgiçer</title>
+<link rel="icon" href="../favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<header class="site">
+  <div class="wrap">
+    <div class="site-title"><a href="../index.html">Kerem Bilgiçer<span class="dot">.</span></a></div>
+    <nav class="site-nav">
+      <ul>
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../personal-projects.html">Personal Projects</a></li>
+        <li><a href="../writing.html" class="active">Writing</a></li>
+        <li><a href="../timeline.html">Timeline</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<main class="narrow">
+  <div class="wrap">
+    <p class="dim"><a href="../writing.html">← Writing</a></p>
+    <h1>MQTT for Industrial Systems: Why Publish-Subscribe Wins Over Polling</h1>
+    <p class="tagline">Notes</p>
+
+    <article class="post-body">
+      <p>Most industrial communication starts the same way: a master polls a list of slaves, one register at a time, on a fixed cycle. Modbus works this way. So does a lot of OPC DA. It's simple, predictable, and easy to reason about — which is exactly why it's the default. It's also the first thing that breaks down as a system grows.</p>
+
+      <h2>Where polling stops scaling</h2>
+      <p>Polling ties bandwidth and latency directly to the number of devices. Add more field devices and either the cycle time grows or you need a faster link. On a wired LAN inside a single cabinet that's a non-issue. On a low-bandwidth radio or cellular link connecting a remote tunnel site or a chain of roadside cabinets, it becomes the bottleneck that decides how much you can deploy.</p>
+      <p>It also wastes effort on the common case. Most registers don't change most of the time. Polling reads them anyway, every cycle, because the master has no way to know which ones actually changed without asking.</p>
+
+      <h2>What publish-subscribe changes</h2>
+      <p>MQTT inverts the relationship. Devices publish when they have something to say — a state change, a threshold crossed, a heartbeat — instead of waiting to be asked. A broker fans messages out to whoever subscribed. Bandwidth scales with how often things actually change, not with how many devices exist or how fast you'd like to notice a change.</p>
+      <p>That property matters most exactly where it's hardest to add bandwidth: remote sites, cellular backhaul, battery-powered sensors. A device that only transmits on change can sit quiet for hours and then report a fault instantly, without a polling cycle in between.</p>
+
+      <h2>What it doesn't remove</h2>
+      <p>Switching protocols doesn't remove the need for discipline. A broker is a new single point of failure unless it's deployed with redundancy. QoS levels matter — QoS 0 fire-and-forget is fine for a noisy sensor reading, wrong for a command that has to arrive exactly once. And retained messages plus a sane topic hierarchy are what make it possible for a new subscriber to learn current state without replaying history.</p>
+      <p>End-to-end authentication and TLS aren't optional either, once the broker is reachable over anything less trusted than a cabinet's internal network. None of this is exotic, but all of it is the part that doesn't show up in the "MQTT is lightweight" pitch.</p>
+
+      <h2>The practical takeaway</h2>
+      <p>Polling protocols aren't wrong — they're a good fit for tightly bounded, local I/O where determinism matters more than scale. Publish-subscribe earns its complexity once the system spans many devices, constrained links, or both. The architectural decision isn't "MQTT is better than Modbus" — it's matching the communication model to the actual shape of the deployment, and being honest about which one you're building for.</p>
+    </article>
+  </div>
+</main>
+
+<footer class="site">
+  <div class="wrap">Kerem Bilgiçer · Setamodius</div>
+</footer>
+</body>
+</html>
